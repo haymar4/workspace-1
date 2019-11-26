@@ -15,10 +15,13 @@ if (isset($_REQUEST["password"])) {
 }
 
 //認証処理
+$islogined= falsed;
 if (($id === $id_ok) and ($password === $password_ok)) {
         $_SESSION["id"] = $id;
+        $isLogined= true;
         
 }
+print_r($_SESSION);
 
 
 ?>
@@ -34,7 +37,12 @@ if (($id === $id_ok) and ($password === $password_ok)) {
 </head>
 <body>
 	<h1>簡単なユーザ認証</h1>
+	<?php if($isLogined === true) { ?>
 	<p>ようこそ、<?= $id ?>さん</p>
 	<p><a href="logout.html">ログアウトする</a></p>
+	<?php } else { ?>
+	<p>ログインに失敗しました</p>
+	<p><a href="entry.html">ログインページへ</a></p>	
+	<?php } ?>
 </body>
 </html>
