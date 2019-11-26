@@ -47,10 +47,10 @@ $_SESSION["cart"] = $cart;
 			<th>価格</th>
 			<th></th>
 		</tr>
-		<?php foreach($cart as list($name,$price)); {?>
+		<?php for ($i= 0; $i < count($items); $i++ ){ ?>
 		<tr>
-			<td><?= $name->getName ?></td>
-			<td><?= $price->getPrice ?>円</td>
+			<td><?= $items[$i]->getName() ?></td>
+			<td><?= $items[$i]->getPrice() ?>円</td>
 		</tr>
         <?php }?>
 	</table>
