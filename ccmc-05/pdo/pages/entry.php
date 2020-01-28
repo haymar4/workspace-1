@@ -1,4 +1,35 @@
 <?php
+
+require_once("../database.php");
+require_once("../classes.php");
+
+$pdo = connectDatabase();
+
+$sql = "select * from areas";
+
+$pstmt = $pdo->prepare($sql);
+
+$pstmt->execute();
+
+$es = $pstmt->fetchAll();
+
+$areas = [];
+
+
+
+foreach($rs as $record) {
+  $id = intval($record["id"]);
+  $name = $record["name"];
+  $area = new Area($id, $name);
+  $areas[] = $area;
+  
+}
+/**/
+echo "<pre>";
+var_dump($areas);
+echo "</pre>";
+exit(0);
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -12,9 +43,9 @@
 		<form action="restaurants.php" method="get">
 		<select name="area">
 			<option value="0">-- 選択してください --</option>
-			<option value="1">福岡</option>
-			<option value="2">神戸</option>
-			<option value="3">伊豆</option>
+			<?php foreach ($areas as $area) { ?>
+			<option value="<?= $area->getId() ?>"><?= $area->getName() ?></option>
+      <?php }?>
 		</select>
 		<input type="submit" value="選択" />
 		</form>
